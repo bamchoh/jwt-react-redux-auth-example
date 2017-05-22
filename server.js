@@ -68,51 +68,6 @@ server.route([
       reply.view('index', { title: 'jwt-react-redux-auth-boilerplate' });
     }
   },
-  {
-    path: '/api/login/',
-    method: 'POST',
-    handler: (request, reply) => {
-      const name = request.payload.name;
-      const pass = request.payload.pass;
-
-      // Use DB connection instead of dummyUser in production.
-      if (dummyUser.name === name && dummyUser.pass === pass) {
-        const jsonWebToken = jwt.sign({
-          id: dummyUser.id,
-          mail: dummyUser.mail
-        }, secretKey);
-
-        return reply([Object.assign({}, dummyUser, { jsonWebToken })]);
-      }
-
-      const err = Boom.badImplementation('name or password is not found', {
-        message: '入力されたユーザー名やパスワードが正しくありません。確認してからやりなおしてください。'
-      });
-      err.output.payload = Object.assign({}, err.output.payload, err.data);
-
-      return reply(err);
-    }
-  },
-  {
-    path: '/api/login/',
-    method: 'GET',
-    handler: (request, reply) => {
-      const jsonWebToken = request.headers.authorization.split(' ')[1];
-
-      jwt.verify(jsonWebToken, secretKey, (err, decode) => {
-        if (err) {
-          return reply(Boom.badImplementation(String(err)));
-        }
-
-        // Use DB connection instead of dummyUser in production.
-        if (dummyUser.id === decode.id) {
-          return reply(dummyUser);
-        }
-
-        return reply(Boom.badImplementation('User is not found'));
-      });
-    }
-  }
 ]);
 
 
