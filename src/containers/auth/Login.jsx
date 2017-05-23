@@ -10,10 +10,10 @@ class Login extends Component {
 
     e.preventDefault();
 
-    this.props.dispatch(fetchUser({
+    this.props.dispatch(fetchUser({ auth: {
       name: target.name.value.trim(),
       pass: target.password.value.trim()
-    }));
+    }}));
   }
 
   renderSubmit() {
