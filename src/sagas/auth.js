@@ -51,11 +51,11 @@ export function* handleLogin() {
       continue;
     }
 
-    const jwt = payload[0].jsonWebToken;
+    const jwt = payload.jwt
 
     localStorage.setItem('jwt', jwt);
 
-    yield put(login(Object.assign({}, payload[0], { jwt })));
+    yield put(login(Object.assign({}, payload.jwt, { jwt })));
   }
 }
 
