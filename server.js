@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const Boom = require('boom');
 
 const server = new Hapi.Server();
-const secretKey = config.get('secretKey');
 
 // dummy user
 // Use DB connection instead of dummyUser in production.
