@@ -11,8 +11,10 @@ class Login extends Component {
     e.preventDefault();
 
     this.props.dispatch(fetchUser({
-      name: target.name.value.trim(),
-      pass: target.password.value.trim()
+      auth: {
+        email: target.email.value.trim(),
+        password: target.password.value.trim()
+      }
     }));
   }
 
@@ -30,8 +32,8 @@ class Login extends Component {
         <form onSubmit={::this.handleSubmit}>
           <ul>
             <li>
-              <p>name</p>
-              <p><input type="text" name="name" required /></p>
+              <p>email</p>
+              <p><input type="text" name="email" required /></p>
             </li>
             <li>
               <p>Password</p>
